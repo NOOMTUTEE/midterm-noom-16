@@ -1,14 +1,25 @@
 import React, { useState } from 'react'
 import { useLoaderData } from 'react-router'
+import { toast } from 'react-toastify'
 import { el } from 'zod/locales'
+import { deletePost } from '../api/postApi'
 
+async function hdlDelete(id) {
 
+    try{ 
+      const res = await deletePost(id)
+      toast.success(res.message)
+    }catch (err){
+      toast.error(err.message)
+    }
+}
 
 function TodolistPage() {
   const [add, setAdd] = useState()
 
   const Todolist = useLoaderData()
   console.log(Todolist)
+
 
 
   return (
@@ -27,9 +38,11 @@ function TodolistPage() {
 
             <p className='flex-1 '>{el.content}</p>
             <button className=' border rounded-2xl w-15 bg-blue-300'>edit</button>
-            <button className='border rounded-2xl bg-red-500 text-white w-7 h-7 my-auto'>x</button>
+            <button  onClick={()=>hdlDelete(el.id)}  className='border rounded-2xl bg-red-500 text-white w-7 h-7 my-auto'>x</button>
+            
           </div>
          ))}
+
         </div>
 
 

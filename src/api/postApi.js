@@ -11,3 +11,12 @@ export const getallPosts = async()=>{
         toast.error("cannot get posts")
     }
 }
+export const deletePost = async(id)=>{
+    try{
+        const res = await api.delete(`/todosv2/delete/${id}`)
+        return res.data 
+    } catch (error) {
+        console.log(error)
+        toast.error("cannot get posts")
+    }
+}
