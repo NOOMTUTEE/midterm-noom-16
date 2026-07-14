@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
+import { useLoaderData } from 'react-router'
+import { el } from 'zod/locales'
 
 
 
 function TodolistPage() {
   const [add, setAdd] = useState()
+
+  const Todolist = useLoaderData()
+  console.log(Todolist)
 
 
   return (
@@ -14,8 +19,20 @@ function TodolistPage() {
         <p className=' w-20 border rounded-2xl text-center bg-amber-400 '>add</p>
       </div>
       <hr className='mt-10 text-gray-400' />
+        
+        <div>
+         {Todolist.map((el)=>(
+          <div key={el.id} className='flex gap-1 my-2'>
+            <input type="checkbox" defaultChecked={el.isdone}/>
 
-      
+            <p className='flex-1 '>{el.content}</p>
+            <button className=' border rounded-2xl w-15 bg-blue-300'>edit</button>
+            <button className='border rounded-2xl bg-red-500 text-white w-7 h-7 my-auto'>x</button>
+          </div>
+         ))}
+        </div>
+
+
     </div>
   )
 }

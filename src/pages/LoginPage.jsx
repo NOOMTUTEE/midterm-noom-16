@@ -12,7 +12,7 @@ function LoginPage() {
 
     const [formData, setFormData] = useState({
         username: '',
-        passwiord: '',
+        password: '',
     })
 
     const setUser =  useUserStore(state => state.setUser)
@@ -31,7 +31,7 @@ function LoginPage() {
             try {
                 const res = await api.post('auth/login', formData)
                 console.log('res', res)
-                const {token, username} = res.data
+                const {token, username} = res.data.user
                 setUser(username)
                 setToken(token)
                 navigate('/TodolisPage')
